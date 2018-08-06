@@ -1,0 +1,43 @@
+- if @invite
+  - if @email_mismatch_error
+    = render 'email_mismatch_error'
+  - elsif @token_error
+    = render 'token_error'
+  - else
+    -if @custom_series.includes_user?(current_user)
+      p
+        |You are already registered for this series
+    -else
+      - if @custom_series.is_public
+        = form_for CustomSeriesLicense.new, html: { class: 'form-inline'} do |f|
+          = hidden_field_tag :custom_series_invitation_id, @invite.id
+          =f.hidden_field :custom_series_id, value: @custom_series.id
+          =f.button "Click here to join this public series", class: 'btn btn-primary'
+          =link_to "Decline", custom_series_invitation_path(@invite), method: :delete,
+                   class: 'btn btn-danger btn-decline-series'
+      -else
+        = form_for CustomSeriesLicense.new, html: { class: 'form-inline'} do |f|
+          = hidden_field_tag :custom_series_invitation_id, @invite.id
+          =f.hidden_field :custom_series_id, value: @custom_series.id
+          =f.button "Click here to join this private series", class: 'btn btn-primary'
+          =link_to "Decline", custom_series_invitation_path(@invite), method: :delete,
+                   class: 'btn btn-danger btn-decline-series'
+.panel.panel-default
+  .panel-heading
+    h3.panel-title
+      = @custom_series.name
+  .panel-body
+    .list-group
+      .list-group-item
+          strong
+            |Series
+      .list-group-item
+        = @custom_series.series.name
+      .list-group-item
+          strong
+            |Users
+      - @custom_series.users.each do |user|
+        .list-group-item
+          = user.email
+              
+

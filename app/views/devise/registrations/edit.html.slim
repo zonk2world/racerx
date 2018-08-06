@@ -1,0 +1,64 @@
+h2
+  | Edit 
+  = resource_name.to_s.humanize
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+  .form-group.has-error
+    .help-block
+      = devise_error_messages!
+
+  .form-group
+    = f.label :username
+    br
+    = f.text_field :username, :autofocus => true, class: 'form-control'
+  .form-group
+    = f.label :name
+    br
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :address_1, "Address"
+    br
+    = f.text_field :address_1, class: 'form-control'
+  .form-group
+    = f.label :address_2, "Address (Continued)"
+    br
+    = f.text_field :address_2, class: 'form-control'
+  .form-group
+    = f.label :city
+    br
+    = f.text_field :city, class: 'form-control'
+  .form-group
+    = f.label :state
+    br
+    = f.text_field :state, class: 'form-control'
+  .form-group
+    = f.label :zip
+    br
+    = f.text_field :zip, class: 'form-control'
+  .form-group
+    = f.label :email
+    br
+    = f.email_field :email, class: 'form-control'
+  .form-group
+    = f.label :password
+    i
+      | (leave blank if you don't want to change it)
+    br
+    = f.password_field :password, :autocomplete => "off", class: 'form-control has-error'
+  .form-group
+    = f.label :password_confirmation
+    br
+    = f.password_field :password_confirmation, class: 'form-control'
+  .form-group
+    = f.label :current_password
+    i
+      | (we need your current password to confirm your changes)
+    br
+    = f.password_field :current_password, class: 'form-control'
+  .form-group
+    = f.submit "Update", class: 'btn btn-lg btn-primary'
+h3
+  | Cancel my account
+p
+  | Unhappy? 
+  = button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn-sm btn-danger"
+= link_to "Back", :back

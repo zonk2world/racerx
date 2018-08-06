@@ -1,0 +1,29 @@
+.table-responsive
+  table.table.table-stripped.table-bordered.table-hover#leaderboards
+    thead
+      tr
+        th.lbCenter width='3%'
+          = sort_link leaderboard.search, :rank, "Rank"
+        th width='80%'
+          = sort_link leaderboard.search, :user_name, "User"
+        - unless leaderboard.round
+          th.lbCenter width='6%'
+            = sort_link leaderboard.search, :average, "AVG"
+        th.lbCenter width='6%'
+          = sort_link leaderboard.search, :total, "Total"
+    tbody
+      - leaderboard.page.each do |row|
+        tr
+          td.lbCenter width='3%'
+            = row.rank
+          td width='80%'
+            = row.user.try(:handle)
+          - unless leaderboard.round
+            td.lbCenter width='6%'
+              = row.average.try(:round,2)
+          td.lbCenter  width='6%'
+            = row.total
+    tfoot
+      tr
+        td colspan="4"
+          = paginate leaderboard.page

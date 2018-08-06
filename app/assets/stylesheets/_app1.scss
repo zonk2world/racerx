@@ -1,0 +1,311 @@
+html, body {
+	height: 100%;
+}
+.page-wrapper {
+	min-height: 100%;
+	margin-bottom: -209px;
+
+	&:after {
+	  content: "";
+	  display: block;
+	  height: 209px;
+	}
+}
+
+
+body {
+	background-color: $bodyBackground;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h1, h2 {
+	color: $offwhite;
+}
+.race-class{
+	color: $offwhite;
+}
+.wrapper {
+	padding: 20px 0;
+}
+.wrapper-dark {
+	background-color: #1a1d21;
+	color: #aaa;
+}
+.wrapper-darkest {
+	background-color: #15181b;
+	color: #777;
+}
+.wrapper-light {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.container {
+	img {
+		max-width: 100%;
+	}
+}
+
+.container-white {
+	background: $offwhite;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin-top: -40px;
+
+	&.bump {
+		margin: 0;
+	}
+}
+
+.navbar-network {
+	background-color: $networkBackground;
+
+	ul li {
+		float: right;
+		padding: 5px 20px;
+		font-size: 12px;
+	}
+
+	.active {
+		background-color: $menuBackground;
+	}
+
+	img {
+		margin-top: -1px;
+		margin-right: 5px;
+		height: 16px;
+		width: 16px;
+	}
+
+	a {
+		color: #fff;
+	}
+}
+
+.headlines {
+	.wrapper-light {
+		padding: 8px 0;
+	}
+
+	.headlines-more {
+		padding: 3px 9px;
+		margin-right: 20px;
+	}
+
+	.headlines-compact {
+		margin: 0 0 0 10px;
+	}
+	
+	.headlines-compact {
+		li:first-child {
+			list-style-type: none;
+		}
+		li {
+			list-style-type: disc;
+			margin-right: 30px;
+			line-height: 30px;
+			float: left;
+		}
+	}
+	.headlines-extended {
+		display: none;
+
+		.date { 
+			margin-left: -15px;
+			line-height: 32px;
+			list-style-type: none;
+			font-weight: bold;
+			font-size: 14px;
+		}
+
+		li {
+			line-height: 28px;
+		}
+	}
+
+	li a {
+		color: #41494d;
+
+		&:hover {
+			text-decoration: none;
+			color: #08c;
+		}
+	}
+}
+
+#content {
+	margin-top: 40px;
+}
+img.logo {
+	max-width: 150px;
+}
+@media (min-width: $screen-md-min) {  
+	
+}
+
+.navbar {
+	margin-bottom: 0;
+
+	li {
+		height: 50px;
+		
+		a {
+			height: 100%;
+		}
+	}
+	
+	i.icon-home {
+		font-size: 17px;
+		margin: 0;
+	}
+}
+
+.navbar-inverse {
+	background: #373d45;
+	a:hover {color: #fff;}
+	border-top: 0;
+	border-bottom: 1px solid;
+
+	.navbar-nav > .active > a, 
+	.navbar-nav > .active > a:hover, 
+	.navbar-nav > .active > a:focus {
+		background-color: $networkBackground;
+	}
+}
+
+.navbar-brand {
+	padding-top: 0;
+	padding-bottom: 0;
+	margin: 10px 20px 0 0;
+	height: 30px;
+	width:162px;
+
+}
+
+.logo{
+	margin-top: 9px;
+}
+.terms {
+  height: 100px;
+  overflow-y: scroll;
+  border: 1px solid #eee;
+  background-color: #FFF;
+  padding: 8px;
+}
+
+
+.global-footer {
+	margin-top: 40px;
+
+	h5 {
+		color: #eee;
+		font-size: 121.3%;
+		font-weight: normal;
+	}
+
+	ul a {
+		font-size: 108%;
+		color: #aaa;
+		text-decoration: none;
+
+		&:hover {
+			color: #eee;
+			text-decoration: none;
+		}
+	}
+}
+.series-h3{
+	color:$offwhite;
+}
+.page-header {
+	color: $menuBackground;
+	border-color: $menuBackground;
+	margin-left : 0;
+	margin-right : 0;
+}
+.panel-default{
+	margin-right : -5px;
+}
+.panel-user {
+	.name {
+		margin: 0;
+		font-weight: bold;
+	}
+	small {
+		float: right;
+		font-weight: normal;
+	}
+}
+
+/* Leaderboards */
+.panel-leaderboard {
+	.nav-tabs {
+		padding-left: 15px;
+	}
+	.filter-container {
+		padding: 15px 0 0;
+		margin-bottom: 15px;
+
+		.caret {
+			margin-left: 7px;
+		}
+	}
+  .prize-filter {
+    margin: 15px;
+  }
+	.alert {
+		margin-bottom: 0;
+	}
+	th {
+		background-color: $offwhite;
+	}
+
+	tfoot td {
+		text-align: center;
+	}
+
+	.pagination {
+		span {
+			position: relative;
+			float: left;
+			padding: 6px 12px;
+			line-height: 1.428571429;
+			text-decoration: none;
+			background-color: white;
+			border: 1px solid #dddddd;
+			margin-left: -1px;
+		}
+
+		.current {
+			z-index: 2;
+			color: white;
+			background-color: #428bca;
+			border-color: #428bca;
+			cursor: default;
+		}
+	}
+}
+.riders-rounds{
+	color:$offwhite;
+}
+.font-black{
+	color:#41494d;
+}
+.btn-primary{
+	background-color: $primary-color;
+	border-color: $primary-color;
+}
+.btn-primary.active{
+	background-color: $primary-color;
+	border-color: $primary-color;
+}
+.open .btn-primary.dropdown-toggle{
+	background-color: #8D5EEB;
+	border-color: $primary-color;
+}
+.btn-primary:hover{
+	background-color: #8D5EEB;
+	border-color: $primary-color;
+}
+.sideNav{
+	margin-left : 0px;
+}
+

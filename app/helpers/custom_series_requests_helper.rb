@@ -1,0 +1,2 @@
+module CustomSeriesRequestsHelper
+end

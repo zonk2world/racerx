@@ -1,0 +1,6 @@
+= form_for CustomSeries.new, url: search_custom_series_index_path, remote: true, html: { class: 'form-inline new-custom-series-form'} do |f|      
+  .form-group
+    = label :keyword, "Private Series Name", class: "sr-only"
+    = text_field_tag :keyword, '', placeholder: "Search Keyword", class: "form-control"
+  .form-group
+    = f.submit 'Search', class: 'btn i_search'

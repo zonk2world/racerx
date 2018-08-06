@@ -1,0 +1,55 @@
+h3.series-h3
+  | Private Series
+  .pull-right
+    = link_to '<i class="fa fa-plus"></i> Create Private Series'.html_safe, new_custom_series_path, remote: true, class: "btn btn-primary add-series"
+
+.new_custom_series.text-center
+
+- if @custom_series.any? 
+  - @custom_series.each do |custom_series|
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title
+          = custom_series.name
+          .pull-right
+            = link_to "Invite User", "#", class: "btn btn-success btn-xs add_user", data: { toggle: 'button', "custom-series" => custom_series.id }
+      .panel-body
+        .list-group.series_users
+          .list-group-item.add_user_form data-custom-series=custom_series.id
+            .row
+              .col-md-12.text-center.invite_by_textfield
+                h3 Enter user email
+                span 
+                  = form_for CustomSeriesInvitation.new, html: { class: 'form-inline'} do |f|
+                    .form-group
+                      =f.hidden_field :custom_series_id, value: custom_series.id
+                      =f.label :recipient_email, class: 'sr-only'
+                      =f.text_field :recipient_email, placeholder: "Email", class: 'form-control'
+                    .form-group
+                      =f.button "Send", class: 'btn btn-default'
+          .list-group-item
+              strong
+                |Users
+          - custom_series.custom_series_licenses.each do |license|
+            .list-group-item
+              = license.user.email
+              -if can? :destroy, license
+                .pull-right
+                  =link_to "Remove", custom_series_license_path(license), method: :delete, class: "btn btn-danger btn-xs"
+        - if custom_series.custom_series_invitations.any?
+          .list-group.pending_invites
+            .list-group-item
+              strong
+                |Pending invites
+            - custom_series.custom_series_invitations.each do |invite|
+              .list-group-item
+                = invite.recipient_email
+                -if can? :destroy, invite
+                  .pull-right
+                    =link_to "Remove", custom_series_invitation_path(invite), method: :delete, class: "btn btn-danger btn-xs"
+-else
+  h3
+    |You do not currently have any private series.
+              
+div.alert.alert-danger.text-center Coming Soon!
+

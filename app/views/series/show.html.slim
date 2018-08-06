@@ -1,0 +1,39 @@
+h1 
+  = @series.name
+hr
+p
+  = link_to "Back", :back, class: 'btn btn-warning' 
+  = link_to 'Leaderboard', leaderboards_series_url(@series), class: 'btn btn-info'
+
+.clearfix
+hr        
+h3.series-h3
+  |Race Classes
+hr
+.row
+  - @race_classes.each do |race_class|
+    .col-md-6
+      h4.race-class
+        = race_class.name
+      - unless race_class.registered_and_paid?(current_user) || race_class.finished
+        h5.race-class
+        - if race_class.unpaid_license?(current_user)
+          - if race_class.available_for_purchase?
+            = link_to "Upgrade to win race class prizes (#{format_money @series.cost})",
+                      new_race_class_license_path(race_class),
+                      class: 'btn btn-success payButton'
+        - else
+          - if race_class.available_for_purchase?
+            = link_to "Play for race class prizes (#{format_money @series.cost})",
+                      new_race_class_license_path(race_class),
+                      class: "btn btn-success payButton"
+          = form_for [race_class, race_class.license_for(current_user)], class: "form-inline" do |f|
+            = f.hidden_field :user_id, value: current_user.id
+            = f.hidden_field :licensable_id, value: race_class.id
+            = f.hidden_field :licensable_type, value: race_class.class
+            = f.hidden_field :paid, value: false
+            = f.submit "Play race class for free", class: 'btn btn-info', id: "series_join"
+      - race_class.rounds.each do |round|
+        h5.race-class
+          a href=round_path(round) 
+            = round

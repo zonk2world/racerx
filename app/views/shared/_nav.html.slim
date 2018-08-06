@@ -1,0 +1,84 @@
+/loldiv.navbar-network.hidden-xs role="navigation"
+/  nav.container
+/    ul.list-unstyled
+/      li
+/        =image_tag 'icon-inactive.png'
+/       = link_to "Vurbmoto", "http://vurbmoto.com/"
+/      li
+/        =image_tag 'icon-inactive.png'
+/        = link_to "Shop", "http://shop.vurb.io/"
+/      li.active
+/        =image_tag 'MotoDynasty_Icon_Active-1.png'
+/        = link_to "MotoDynasty", root_url
+nav.nav.nav_header
+  div
+    <a class="header_link open_nav i_nav" title="Navigation">
+  div.logo
+    = link_to root_path, class: "motoD" do
+        =image_tag 'racer-x-shield.png', alt: "racerX", class: "" 
+  = link_to root_path, class: "" do
+    =image_tag 'mxdy-logo.png', alt: "Motodynasty", class: "mxdyLogoMobile"
+nav.nav.nav_main
+  .container
+    div.logo
+      = link_to root_path, class: "motoD" do
+        =image_tag 'racer-x-shield.png', alt: "Motodynasty", class: ""
+    ul.nav_left
+      = link_to root_path, class: "" do
+        =image_tag 'mxdy-logo.png', alt: "Motodynasty", class: "mxdyLogo"
+    ul.nav_right
+      -if user_signed_in?
+        li class="parent #{nav_class_for(:profile)}"
+          = link_to "Play", user_path(current_user)
+        li class="parent #{nav_class_for(:leaderboards)}"
+          = link_to "Leaderboard", leaderboards_path
+        li class="parent #{nav_class_for(:rounds)}"
+          = link_to "My Results", rounds_path
+        li class="parent #{nav_class_for(:custom_series)}"
+          = link_to "My Series", custom_series_index_path
+        li.sep
+        li
+          <a class="i i_facebook" target="blank" href="https://www.facebook.com/motodynastygame">
+        li
+          <a class="i i_twitter" target="blank" href="https://twitter.com/MotoDynasty">
+        li
+          <a class="i i_instagram" target="blank" href="http://instagram.com/motodynasty">
+        li.sep
+        li.parent
+          =link_to "", edit_user_registration_path(current_user), class: "i i_user"
+          .dropdown.account
+            ul.sub_nav
+              li
+                = link_to "Settings", edit_user_registration_path(current_user)
+              li
+                = link_to "Sign out", destroy_user_session_path, method: :delete, id: "sign_out_link"
+      - else
+        li class="parent #{nav_class_for(:how_to_play)}"
+          = link_to "How to Play", instructions_path
+        li.sep
+        li
+          <a class="i i_facebook" target="blank" href="https://www.facebook.com/motodynastygame">
+        li
+          <a class="i i_twitter" target="blank" href="https://twitter.com/MotoDynasty">
+        li
+          <a class="i i_instagram" target="blank" href="http://instagram.com/motodynasty">  
+        li.sep
+        li.parent
+          =link_to "" , new_user_session_path, class: "i i_user"
+          div.dropdown.account
+            ul.sub_nav
+              li
+                =link_to "Sign In", new_user_session_path
+              li
+                = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+              li
+                = link_to "Sign up", new_user_registration_path
+-if current_user
+  .userBar role="navigation"
+    nav.container
+      ul.list-unstyled
+        li.pull-left.user
+          = current_user.handle
+        li.pull-right.user
+          = current_user.total_points
+          |PTS

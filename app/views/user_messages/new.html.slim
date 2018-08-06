@@ -1,0 +1,38 @@
+.row.container-white
+  .col-md-8.col-md-offset-2
+    h2
+      | Contact Us
+    = form_for(@user_message) do |f|
+      - if @user_message.errors.any?
+        .form-group.has-error
+          .help-block
+            h1
+              = @user_message.errors.count
+              | &nbsp;
+              = 'error'.pluralize(@user_message.errors.count)
+              | &nbsp; prohibited this user from being saved:
+            -@user_message.errors.each do |key, value|            
+              ul
+                li
+                  = key
+                  | &nbsp;
+                  = value
+          
+      .form-group
+        = f.label :name
+        br
+        = f.text_field :name, autofocus: true, class: 'form-control'
+      .form-group
+        = f.label :email
+        br
+        = f.email_field :email, class: 'form-control'
+      .form-group
+        = f.label :subject
+        br
+        = f.text_field :subject, class: 'form-control'
+      .form-group
+        = f.label :content
+        br
+        = f.text_area :content, class: 'form-control'
+      .form-group
+        = f.submit "Submit feedback", class: 'btn btn-primary'

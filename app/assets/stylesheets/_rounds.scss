@@ -1,0 +1,108 @@
+// Place all the styles related to the rounds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.racer-row {
+	select.form-control {
+		width: 100%;
+		margin-bottom: 7px;
+	}
+}
+
+@media (max-width: 768px){
+  .select_riders{
+  width:100%;
+}
+}
+.btn-series{
+margin-top:10px;
+}
+.bonus{
+  width:70%;
+}
+.seleteTitle{
+  margin-bottom:5px;
+}
+.Blabel{
+  margin-left: 15px;
+  
+}
+.RemoveBonus{
+  margin-bottom:10px;
+}
+.endTime{
+  color:#D9534F;
+  display: inline;
+}
+.timeTitle{
+  display: inline;
+}
+.tabWell{
+  background-color: white;
+  h2, h3, h4, h5 {
+    color: black;
+  }
+}
+@media (min-width: 768px) {
+  .nav-disappear {display: none !important;
+  }
+}    
+
+@media (max-width: 768px) {
+  .tab-disappear {display: none !important;
+  }
+}
+
+.navbar-defaul .navbar-nav > .active > a {
+  background-color : #eb2a2e;
+  color : white;
+}
+.navbar-defaul .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+  /*
+   border-color: #6730D3;
+    background-color: whitesmoke;
+    color : $primary-color; 
+  */
+  background-color : #eb2a2e;
+  color : white;
+}
+@media (min-width: 700px) {
+  .navHead {
+      float: none;
+  }
+  .navbarToggle {
+      display: block;
+  }
+  .navbarCollapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbarCollapse.collapse {
+      display: none!important;
+  }
+  .navbarNav {
+      float: none!important;
+      
+  }
+  .navbarNav>li {
+      float: none;
+  }
+  .navbarav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+  .navbar-collapse.in {
+      overflow-y: auto!important;
+      display: block!important;
+  }
+}
+@media (max-width: 760px) {
+  .navbarNav>li {
+        float: none;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+ .jumbotron {
+    margin-top: -30px;
+  }
+}

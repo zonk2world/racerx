@@ -1,0 +1,8 @@
+td[colspan="5"]
+  = form_for CustomSeriesInvitation.new, html: { class: 'form-inline'} do |f|
+    .form-group
+      =f.hidden_field :custom_series_id, value: @custom_series.id
+      =f.label :recipient_email, class: 'sr-only'
+      =f.text_field :recipient_email, placeholder: "Email", class: 'form-control'
+    .form-group
+      =f.button "Send", class: 'btn btn-default'

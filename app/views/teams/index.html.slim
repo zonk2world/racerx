@@ -1,0 +1,18 @@
+.page-header
+  h1 Teams
+
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-sm-6
+        h4 Team Name
+      .col-sm-6
+        h4 No. of Riders
+  .panel-body         
+    - @teams.each do |team|
+        .row
+          .col-sm-6
+            = link_to team.name, team_path(team)
+          .col-sm-6
+            = team.riders.count
+            

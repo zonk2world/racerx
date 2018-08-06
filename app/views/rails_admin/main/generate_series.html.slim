@@ -1,0 +1,18 @@
+= form_tag generate_series_path, method: "post" do
+  .form-group
+    = label_tag :series_name, "Series Name:", class: "control-label"
+    = text_field_tag :series_name, '', class: "form-control", required: true
+  .form-group
+    = label_tag :cost, "Race Class Cost (in cents):", class: "control-label"
+    = number_field_tag :cost, 600, class: "form-control", required: true
+  .form-group
+    = label_tag :cost, "Individual Round Cost (in cents):", class: "control-label"
+    = number_field_tag :round_cost, 100, class: "form-control", required: true
+  .form-group
+    = label_tag :class_count, "Number of Race Classes:", class: "control-label"
+    = number_field_tag :class_count, 3, class: "form-control", required: true
+  .form-group
+    = label_tag :round_count, "Number of Rounds per Race Class:", class: "control-label"
+    = number_field_tag :round_count, 16, class: "form-control", required: true
+  .form-group
+    = submit_tag "Generate", class: "btn btn-primary"

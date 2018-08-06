@@ -1,0 +1,85 @@
+br
+br
+.row
+  .col-md-4
+    #features.module.clearfix
+      header.module_heading
+        nav.nav.nav_horiz.nav_context.nav_icon
+          ul
+            li
+              a.i_feed href="/feeds/rss/posts" 
+            li.sep
+            li
+              a.i_list href="/features" 
+        h2
+          a href="/features"  Features
+      span.new
+      span data-id="46115" itemscope="" itemtype="http://schema.org/Article" 
+        a.ui_link.hero href="/2014/12/16/250-words-do-you-doubt-him" itemprop="url" 
+          span.img_wrap
+            img alt=("250 Words: Do You Doubt Him?") src="http://rx.iscdn.net/2014/12/88720_carreed-anaheim3-cudby-194.jpg"
+            span.sponsor_logo href="https://www.yamahapartsandaccessories.com/accessories/Off-Road-Motorcycle?ls=off-road&amp;taxo_productdepartment_ss_facet=20&amp;attr_5_ss_facet=321" target="blank" title="GYTR" 
+              img alt="GYTR" src="http://rx.iscdn.net/2014/01/65178_gytr.png"
+          span.title_wrap
+            span.hero_title itemprop="name" 
+              span 250 Words:
+              | Do You Doubt Him?
+          span.block itemprop="description"  We all say we believe in Chad Reed. Do we?
+          span.flag.flag_red.flag_top.i_article
+
+  .col-md-4.drop_shadow
+    .module.clearfix
+      header.module_heading
+        nav.nav.nav_horiz.nav_context.nav_icon
+          ul
+            li
+              a.i_feed href="/feeds/rss/category/breaking-news" 
+            li.sep
+            li
+              a.i_list href="/category/breaking-news" 
+        h2
+          a href="/category/breaking-news" Dynasty News
+
+      a.clearfix href="#"
+        img src="http://rx.iscdn.net/i/banners/fly-racing.png" width="100%"
+      br
+      .btn-group.btn-full
+        a.btn.bn_btn.act Breaking News
+        a.btn.bn_btn.act Industry News
+
+      span.new
+      ul#latest_news.ui_list.ui_line
+        li.separator Top News
+        li.breaking-news data-id="46113" itemscope="" itemtype="http://schema.org/NewsArticle" 
+          a.ui_link href="/2014/12/16/james-stewart-update" itemprop="url" 
+            img.pull_left alt=("James Stewart Update") src="http://rx.iscdn.net/2014/12/88716_cargm_141120_stewart_flbd62f7.jpg" width="40%"
+            span.link_content
+              span.link_title itemprop="name"  James Stewart Update
+            span.corner_i.i_article
+        li.breaking-news data-id="46111" itemscope="" itemtype="http://schema.org/NewsArticle" 
+          a.ui_link href="/2014/12/16/dreamland-with-nick-gaines" itemprop="url" 
+            img.pull_left alt=("Dreamland with Nick Gaines") src="http://rx.iscdn.net/2014/12/88710_screen_shot_2014-12-16_at_852_11_am_.png" width="40%"
+            span.link_content
+              span.link_title itemprop="name"  Dreamland with Nick Gaines
+            span.corner_i.i_video
+
+  .col-md-4
+    .module.clearfix
+      header.module_heading
+        nav.nav.nav_horiz.nav_context.nav_icon
+          ul
+            li
+              a.i_feed href="/feeds/rss/category/breaking-news" 
+            li.sep
+            li
+              a.i_list href="/category/breaking-news" 
+        h2
+          a href="/category/breaking-news" SX Leaderboard
+      ol.nav
+        - @sx_leaderboard.each do |row|
+          li = row.user.try(:handle) + ": " + row.total.to_s
+
+br
+.btn-center
+  = link_to "Sign up today!", new_user_registration_path, class: 'btn btn-responsive btn-success'
+  = link_to "How to Play", instructions_path, class: 'btn btn-responsive btn-info'

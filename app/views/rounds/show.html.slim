@@ -1,0 +1,74 @@
+h2
+  = @round.name
+hr
+p
+  = link_to "Back", :back, class: 'btn btn-warning' 
+  - if @round.finished?
+    = link_to 'Leaderboard', leaderboards_series_race_class_round_url(@round.race_class.series, @round.race_class, @round), class: 'btn btn-info'
+  - else
+    - unless @round.registered_and_paid?(current_user)
+      h5
+      - if @round.unpaid_license?(current_user)
+        - if @round.available_for_purchase?
+          = link_to "Upgrade to win round prizes (#{format_money @round.license_cost})",
+                    new_round_license_path(@round),
+                    class: 'btn btn-lg btn-success'
+      - else
+        - if @round.available_for_purchase?
+          = link_to "Play for round prizes (#{format_money @round.license_cost})",
+                    new_round_license_path(@round),
+                    class: "btn btn-lg btn-success"
+        = form_for [@round, @round.license_for(current_user)], class: "form-inline" do |f|
+          = f.hidden_field :user_id, value: current_user.id
+          = f.hidden_field :licensable_id, value: @round.id
+          = f.hidden_field :licensable_type, value: @round.class
+          = f.hidden_field :paid, value: false
+          = f.submit "Play round for free", class: 'btn btn-lg btn-info', id: "series_join"
+.row
+  .col-md-6.riders-rounds
+    h4 Riders
+    hr
+    -if @round.finished?
+      h4 
+        |Finishing position
+      ol.nav
+        -@round.round_riders_where_finished_is(true).each do |round_rider|
+          li
+            = round_rider.finished_description
+      hr
+      h4
+        |Other riders
+      ul.nav
+        -@round.round_riders_where_finished_is(false).each do |round_rider|
+          li
+            = round_rider.finished_description
+    -else
+      ul.nav
+        -@round.riders.each do |rider|
+          li
+            = rider.to_s
+  .col-md-6.riders-rounds
+    h4 Information
+    hr
+    .row
+      .col-md-4        
+        strong Race Class
+      .col-md-8
+        = @round.race_class.name
+    .row
+      .col-md-4        
+        strong Start Time
+      .col-md-8
+        = format_datetime(@round.start_time)
+    .row
+      .col-md-4        
+        strong End Time
+      .col-md-8
+        = format_datetime(@round.end_time)
+    br
+    .row
+      .col-md-12.riders-rounds
+        -if @round.finished? && current_user.participant_in_round?(@round)
+          h4 Your results
+          hr
+          = render partial: 'users/finished_round', locals: {round: @round, race_class: @round.race_class} 

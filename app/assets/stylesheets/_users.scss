@@ -1,0 +1,184 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// style found at http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/
+
+ol { 
+    counter-reset:li; /* Initiate a counter */
+    margin-left:0; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */
+}
+ol > li {
+    position:relative; /* Create a positioning context */
+    margin:0 0 6px 2em; /* Give each list item a left margin to make room for the numbers */
+    padding:4px 8px; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+    border-top:2px solid #666;
+    background:#f6f6f6;
+}
+ol > li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-2px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:2em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right:8px;
+    padding:4px;
+    border-top:2px solid #666;
+    color:#fff;
+    background:#666;
+    font-weight:bold;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+}
+li ol,
+li ul {margin-top:6px;}
+ol ol li:last-child {margin-bottom:0;}
+
+.dragging {
+    background: #AAA;
+}
+.panel-default>.panel-heading {
+    color: white;
+    background-color: #6730D3;
+}
+.navbar {
+    margin-bottom: 0;
+}
+.nav-tabs>li>a{
+    background-color: #fff; 
+    border-color: #373D45;
+    color: #373D45;
+}
+.nav-tabs > li > a:hover{
+    /* background-color: whitesmoke; */
+    background-color: #eb2a2e;
+    color : white; 
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    background-color : #eb2a2e;
+    color : white;
+}
+.nav-pills>li>a{
+    background-color: #fff; 
+    border-color: #373D45;
+    color: #373D45;
+}
+.nav-pills > li > a:hover{
+    background-color: #eb2a2e;
+    /* color : $primary-color; */
+    color: white;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    background-color : #eb2a2e;
+    color : white;
+}
+.nav-sidebar > li{
+    background-color: #fff; 
+    border-color: #373D45;
+    color: #373D45;
+}
+.nav-sidebar > li > a:hover{
+    /*
+    border-color: #6730D3;
+    background-color: whitesmoke;
+    color : $primary-color; 
+    */
+    background-color: #eb2a2e;
+    color: white;
+}
+.nav-sidebar > li.active > a, .nav-sidebar > li.active > a:hover, .nav-sidebar > li.active > a:focus{
+    background-color : #eb2a2e;
+    color : white;
+}
+.nav-sidebar > li > a {
+    background-color: #fff; 
+    border-color: #373D45;
+    color: #373D45;
+}
+.available{
+   text-align: center;
+}
+
+.move-btn{
+    /*
+    background-color: $primary-color;
+    */
+    background-color: #eb2a2e;
+}
+.move-btn:hover{
+    background-color: #eb2a2e;
+}
+.glyph-white{
+    color: white;
+}
+/*
+.breadcrumb{
+    background-color: $primary-color;
+}
+.breadcrumb > li > a{
+    color: white;
+}
+.breadcrumb > li > a:hover{
+    color: whitesmoke;
+}
+*/
+.breadcrumb {
+    padding: 7px 14px;
+    margin: 0 0 18px;
+    background-color: #f5f5f5;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear,left top,left bottom,from(#fff),to(#f5f5f5));
+    background-image: -moz-linear-gradient(top,#fff,#f5f5f5);
+    background-image: -ms-linear-gradient(top,#fff,#f5f5f5);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fff),color-stop(100%,#f5f5f5));
+    background-image: -webkit-linear-gradient(top,#fff,#f5f5f5);
+    background-image: -o-linear-gradient(top,#fff,#f5f5f5);
+    background-image: linear-gradient(top,#fff,#f5f5f5);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#f5f5f5',GradientType=0);
+    border: 1px solid #ddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+}
+.glyphicon-question-sign{
+    font-size : 17px;
+    margin-left : 10px;
+}
+.glyphicon-question-sign:hover{
+    color : $primary-color;
+}
+.page-header > a{
+    margin-left: 0;
+}
+.userBar{
+    background-color: $primary-color;
+    color: white;
+}
+.userBar > nav > ul > li{
+    color : white;
+}
+
+.font-black{
+    color:#41494d;
+}
+
+.terms {
+  height: 100px;
+  overflow-y: scroll;
+  border: 1px solid #eee;
+  background-color: #FFF;
+  padding: 8px;
+}
+

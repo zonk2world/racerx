@@ -1,0 +1,86 @@
+
+.panel.panel-default.panel-leaderboard
+  - if ancestors.present?
+    = breadcrumbs ancestors
+  - if siblings.present?
+    ul.nav.nav-tabs.list-unstyled.display-none
+      - siblings.each do |sibling|
+        li class=sibling_nav_class(current, sibling)
+          = link_to sibling.name, url_for(ancestors + [sibling])
+  .panel-body
+    .module.leaderboard_module.clearfix
+      header.module_heading.module_heading_dropdown
+        nav.nav.nav_horiz.nav_context.nav_icon
+          ul
+            li
+              a href="javascript:void(0)" 
+                i.icon-sort-down
+        h2
+          a class="leaderRed" href="javascript:void(0)" = series_name
+          .dropdown
+            ul
+              - series_list.each do |se|
+                li 
+                  = link_to se.name, url_for(series_ancestor + [se])
+
+    .module.leaderboard_module_round.clearfix
+      header.module_heading.module_heading_dropdown.module_heading_dropdown_red
+        nav.nav.nav_horiz.nav_context.nav_icon
+          ul
+            li
+              a href="javascript:void(0)" 
+                i.icon-sort-down
+        h2
+          a href="javascript:void(0)" = class_name
+          - if class_list.present?
+            .dropdown
+              ul
+                - class_list.each do |ca|
+                  li 
+                    = link_to ca.name, url_for(class_ancestor + [ca])
+
+    .module.leaderboard_module_class.clearfix
+      header.module_heading.module_heading_dropdown.module_heading_dropdown_red
+        nav.nav.nav_horiz.nav_context.nav_icon
+          ul
+            li
+              a href="javascript:void(0)" 
+                i.icon-sort-down
+        h2
+          a href="javascript:void(0)" = round_name
+          - if round_list.present?
+            .dropdown
+              ul
+                - round_list.each do |rn|
+                  li 
+                    = link_to rn.name, url_for(round_anchestor + [rn])
+    .clearfix
+
+    - if current_user
+      .text-center
+        - if user_rank = leaderboard.for_user(current_user)
+          .alert.alert-success
+            | You are ranked #{user_rank.rank.ordinalize} with a score of #{user_rank.total}.
+        - else
+          .alert.alert-warning
+            | You are not ranked on this leaderboard.       
+    - if children.present?
+      nav.nav.nav_horiz.nav_context.display-none
+        ul
+          - children.each do |child|
+            li
+              = link_to child.name, url_for(ancestors + [current, child])
+    - if prize_eligible?
+      = link_to "Show prize eligible",
+                canonical_path(prize_filter_options prize_filter),
+                class: prize_filter_button_class(prize_filter)
+
+    -if current_user && leaderboard.series.present?
+      nav.nav.nav_horiz.nav_context
+        ul
+          - current_user.custom_series_for_series(leaderboard.series).each do |custom_series|
+            li
+              = link_to custom_series.name, url_for(custom_series_id: custom_series.id)
+    br
+    .col-sm-12 
+      = render partial: "leaderboard", locals: {leaderboard: leaderboard}

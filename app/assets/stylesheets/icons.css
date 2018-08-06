@@ -1,0 +1,200 @@
+@font-face {
+	font-family: 'icons';
+	src:url('icons-1.01.eot');
+	src:url('icons-1.011.eot') format('embedded-opentype'),
+		url('icons-1.01.woff') format('woff'),
+		url('icons-1.01.ttf') format('truetype'),
+		url('icons-1.01.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icons';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="i_"] {
+*/
+
+.i_above {
+	font-size: 2em;
+	display: block;
+}
+
+[class*="i_"]:before {
+
+	font-family: 'icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	padding: 10px 5px 0 0;
+	font-size: 1.2em;
+	vertical-align: top;
+}
+
+/* Social Networks */
+.i_twitter:before {
+	content: "\e600";
+}
+.i_flickr:before {
+	content: "\e33c";
+}
+.i_facebook:before {
+	content: "\e32b";
+}
+.i_vimeo:before {
+	content: "\e337";
+}
+.i_youtube:before {
+	content: "\e335";
+}
+.i_instagram:before {
+	content: "\e32e";
+}
+.i_aol:before {
+	content: "\e601";
+}
+.i_myspace:before {
+	content: "\e602";
+}
+.i_openid:before {
+	content: "\e603";
+}
+.i_pinterest:before {
+	content: "\e604";
+}
+
+/* General */
+
+.i_feed:before {
+	content: "\e332";
+}
+.i_link:before {
+	content: "\e1df";
+}
+.i_newsletter:before {
+	content: "\e19b";
+}
+.i_close:before {
+	content: "\e257";
+}
+.i_check:before {
+	content: "\e258";
+}
+.i_mobile:before {
+	content: "\e0c5";
+}
+.i_desktop:before,
+.i_wallpaper:before {
+	content: "\e0c2";
+}
+.i_google:before {
+	content: "\e325";
+}
+.i_yahoo:before {
+	content: "\e356";
+}
+.i_website:before {
+	content: "\e1da";
+}
+.i_comment:before {
+	content: "\e0e2";
+}
+.i_reply:before {
+	content: "\e0e0";
+}
+.i_phone:before {
+	content: "\e093";
+}
+.i_plus:before {
+	content: "\e24a";
+}
+.i_arrow-left:before {
+	content: "\e299";
+}
+.i_arrow-right:before {
+	content: "\e297";
+}
+.i_location:before {
+	content: "\e0a5";
+}
+.i_report:before {
+	content: "\e605";
+}
+.i_video:before {
+	content: "\e606";
+}
+.i_delete:before {
+	content: "\e607";
+}
+.i_tickets:before {
+	content: "\e608";
+}
+.i_list:before {
+	content: "\e609";
+}
+.i_gallery:before {
+	content: "\e60a";
+}
+.i_user:before {
+	content: "\e60b";
+}
+.i_timer:before {
+	content: "\e60c";
+}
+.i_home:before {
+	content: "\e60d";
+}
+.i_edit:before {
+	content: "\e60e";
+}
+.i_clock:before {
+	content: "\e60f";
+}
+.i_magazine:before {
+	content: "\e610";
+}
+.i_preview:before {
+	content: "\e611";
+}
+.i_nav:before {
+	content: "\e612";
+}
+.i_share:before {
+	content: "\e318";
+}
+.i_grid:before {
+	content: "\e615";
+}
+.i_play:before {
+	content: "\e613";
+}
+.i_pause:before {
+	content: "\e614";
+}
+.i_poll:before {
+	content: "\e616";
+}
+.i_article:before {
+	content: "\e617";
+}
+.i_search:before {
+	content: "\e618";
+}

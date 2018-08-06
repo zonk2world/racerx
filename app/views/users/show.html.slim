@@ -1,0 +1,64 @@
+.row
+  .col-md-12.col-sm-12.available
+    h2.available Available Series 
+    nav.nav.nav_horiz.nav_context
+      ul
+        - Series.available_list.each do |series|
+          li
+            = link_to series.name, series_path(series)
+    
+- if current_user.race_classes.empty?
+  .alert.alert-warning
+    |You aren't currently signed up for any series
+- else
+  .row.tabpanel
+    .col-md-4.col-sm-4
+      h4.cardHeader
+        |Race Cards
+      ul.nav.nav-sidebar.drop_shadow
+        - current_user.race_classes.each do |race_class|
+          
+          li
+            a data-toggle='tab' href=("#race_class#{race_class.id}")
+              = race_class.series
+              | &nbsp;
+              = race_class.name
+
+    .tab-content.col-md-8.col-sm-8.col-xs-12
+      - current_user.race_classes.each do |race_class|
+        
+        .tab-pane id=("race_class#{race_class.id}") role="tabpanel"
+          = render partial: 'users/race_class', locals: {series: race_class.series, race_class: race_class, round: nil}
+
+br
+.modal.fade id="bonusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+          | &times;
+        h4.modal-title
+          |Bonus Help
+      .modal-body
+        h3 BONUS SCORING
+        b Pole Position
+        ul
+          li Pole Position is awarded to the fastest qualifier in timed practice.
+          li If your selected racer is the winner of this category you will gain 5 points
+          li If you chose a racer that didn’t win this category, yup you guessed it, you lose 5 points
+        b Heat Winner
+        ul
+          li This is where you will choose 1 racer that you think will win the heat race he is racing in, regardless of the racer being in the first or second heat race in Supercross.
+          li In Motocross, you will choose 1 racer that you think will win one of the two motos that race day. 
+          li If your selection is the winner, you earn 15 points
+          li If you chose wrong, your points drop by 15
+        b Main Event Hole Shot
+        ul
+          li This is where you choose 1 racer that you think will pull the hole shot in the main event in Supercross
+          li In Motocross, you will choose 1 racer that you think will pull the hole shot in one of the two motos that race day. 
+          li If your rider pulls the main event holeshot, you get 20 points
+          li If your rider doesn’t cross the holeshot line first, you will be deducted 20 points      
+      .modal-footer
+        button.btn.btn-primary type="button" data-dismiss="modal"
+          |Close                              
+

@@ -1,0 +1,46 @@
+.panel.panel-default
+  .panel-body
+    h4.cardHeader
+      |Race Class
+      | &nbsp;
+      = race_class.name
+    - if race_class.registered_and_paid?(current_user)
+      button class='btn btn-primary' disabled='disabled' Eligible for race class prize
+    - elsif race_class.available_for_purchase?
+      - if race_class.license_cost > 0
+        = link_to "Upgrade to win race class prize (#{format_money race_class.license_cost})",
+                        new_race_class_license_path(race_class),
+                        class: 'btn btn-success'
+    p
+      |Total Points: &nbsp;
+      = current_user.total_points_for_race_class(race_class)
+      - if round = Round.current_for(race_class)
+        h3
+          = round.name
+        - if round.registered? current_user
+          - if round.registered_and_paid? current_user
+            button class='btn btn-primary' disabled='disabled' Eligible for round prize
+          - elsif round.available_for_purchase?
+          = link_to "Upgrade to win round prize (#{format_money round.license_cost})",
+                new_round_license_path(round),
+                class: 'btn btn-success payButton'
+          .row 
+            .col-md-12
+              p.timeTitle
+                | Auto Submit : &nbsp;
+              p.endTime
+                = format_datetime(round.end_time)
+              .clearfix
+                - if round.rider_selection_open? 
+                  = render partial: 'users/round', locals: {round: round, race_class: race_class} 
+                - else
+                  = render partial: 'users/started_round', locals: {round: round, race_class: race_class} 
+        - else
+          p Register for this round to play.
+    h4 
+      |Finished Rounds  
+    ul.finished_rounds    
+      - Round.finished_for(race_class).each do |round|
+        li 
+          = link_to round.name, round_path(round)
+

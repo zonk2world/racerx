@@ -1,0 +1,5 @@
+p
+  |Your invite token may be intended for another user.
+p
+  |You're currently signed in as <strong>#{current_user.email}<strong>. 
+  = link_to 'Sign out', destroy_user_session_path, method: :delete

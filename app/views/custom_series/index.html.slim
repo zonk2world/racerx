@@ -1,0 +1,147 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      | Search Other Custom Series
+  .panel-body  
+    = render 'search_form'      
+    #search_custom_series
+
+
+h3.series-h3
+  | My Private Series
+  .pull-right
+    = link_to 'Create Private Series'.html_safe, new_private_custom_series_index_path, remote: true, class: "btn i_plus add-series"
+
+#new_private_custom_series.text-center
+  
+.custom-series-list.text-center
+
+  table.table.table-striped    
+    thead
+      tr
+        th Name
+        th Series
+        th Users
+        th Invitations
+        th Requests
+        th Actions
+    tbody
+    - if @private_custom_series.any?       
+      - @private_custom_series.each do |custom_series|
+        tr
+          td 
+            = custom_series.name
+          td
+            = custom_series.series.name
+          td 
+            = custom_series.users.count
+          td 
+            = custom_series.custom_series_invitations.count
+          td 
+            = custom_series.custom_series_requests.count
+          td
+            = link_to 'Edit', edit_custom_series_path(custom_series), class: 'btn i_edit' if custom_series.owner == current_user
+            = link_to 'View', custom_series_path(custom_series), class: 'btn' unless custom_series.owner == current_user
+            = link_to 'Delete', custom_series_path(custom_series), method: :delete, class: 'btn i_delete', confirm: 'Are you sure?' if custom_series.owner == current_user
+
+            = link_to 'Leave', leave_custom_series_custom_series_licenses_path(custom_series_id: custom_series.id), method: :delete, class: 'btn i_delete', confirm: 'Are you sure?' unless custom_series.owner == current_user
+
+            = link_to 'Invite', new_series_invitation_path(custom_series.id), remote: true, class: 'btn i_share' if custom_series.owner == current_user || custom_series.includes_user?(current_user)            
+            = link_to 'Share', '#', class: 'btn i_facebook'
+            = link_to 'Leader Board', '#', class: 'btn'
+        tr.new-series-invitation[id="new_series_invitation_#{custom_series.id}"]
+h3.series-h3
+  | My Public Series
+  .pull-right
+    = link_to 'Create Public Series'.html_safe, new_public_custom_series_index_path, remote: true, class: "btn i_plus add-series"
+#new_public_custom_series.text-center
+.public-custom-series-list.text-center
+  table.table.table-striped    
+    thead
+      tr
+        th Name
+        th Series
+        th Users
+        th Invitations
+        th Actions
+    tbody
+    - if @public_custom_series.any?       
+      - @public_custom_series.each do |custom_series|
+        tr
+          td 
+            = custom_series.name
+          td
+            = custom_series.series.name
+          td 
+            = custom_series.users.count
+          td 
+            = custom_series.custom_series_invitations.count
+          td
+            = link_to 'Edit', edit_custom_series_path(custom_series), class: 'btn i_edit' if custom_series.owner == current_user
+            = link_to 'View', custom_series_path(custom_series), class: 'btn' unless custom_series.owner == current_user
+
+            - if custom_series.owner == current_user
+              = link_to 'Delete', custom_series_path(custom_series), method: :delete, class: 'btn i_delete', confirm: 'Are you sure?' 
+            - else
+              = link_to 'Leave', leave_custom_series_custom_series_licenses_path(custom_series_id: custom_series.id), method: :delete, class: 'btn i_delete', confirm: 'Are you sure?'
+
+            = link_to 'Invite', new_series_invitation_path(custom_series.id), remote: true, class: 'btn i_share'
+            = link_to 'Share', '#', class: 'btn i_facebook'
+            = link_to 'Leader Board', '#', class: 'btn'
+        tr.new-series-invitation[id="new_series_invitation_#{custom_series.id}"]
+
+
+h3.series-h3
+  | Custom Series Invited
+.invited-list.text-center
+  table.table.table-striped    
+    thead
+      tr
+        th Custom Series
+        th Master Series        
+        th Sender
+        th Actions
+    tbody
+      - current_user.get_custom_series_invitations.each do |custom_series_invitation|
+        tr
+          td
+            = custom_series_invitation.custom_series.name
+          td          
+            = custom_series_invitation.custom_series.series.name
+          td
+            = "#{custom_series_invitation.sender.email} #{custom_series_invitation.sender.name}"
+          td
+            = link_to 'Accept', custom_series_path(custom_series_invitation.custom_series, token: custom_series_invitation.token), class: 'btn'
+
+h3.series-h3
+  | Requests for Your Custom Series
+.invited-list.text-center
+  table.table.table-striped    
+    thead
+      tr
+        th Custom Series        
+        th Sender
+        th Actions
+    tbody
+      - current_user.get_custom_series_requests.each do |custom_series_request|
+        tr
+          td
+            = custom_series_request.custom_series.name          
+          td
+            = "#{custom_series_request.sender.email} #{custom_series_request.sender.name}"
+          td
+            = link_to 'Detail', custom_series_show_request_path(custom_series_request.custom_series, request_token: custom_series_request.token), class: 'btn'            
+
+
+
+
+
+
+
+
+
+
+
+
+
+

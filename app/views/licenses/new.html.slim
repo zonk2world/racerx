@@ -1,0 +1,32 @@
+.row
+  .col-md-6.col-md-offset-2
+    = render partial: "licenses/#{@licensable.class.to_s.underscore}", locals: {licensable: @licensable} 
+.row
+  .col-md-6.col-md-offset-2
+    = form_tag({controller: "licenses", action: "create"}, method: "POST", id: "payment-form", :"data-stripe-key" => ENV['STRIPE_PUBLISHABLE_KEY']) 
+      span.payment-errors
+      .form-group
+        = label_tag :name, "Name", class: 'control-label race-class'
+        = text_field_tag :name, nil, name: nil, "data-stripe" => "name", class: 'form-control', required: true
+      .form-group
+        = hidden_field_tag :paid, true
+        = label_tag :card_number, "Card Number", class: 'control-label race-class'
+        = text_field_tag :card_number, nil, name: nil, "data-stripe" => "number", class: 'form-control', maxlength: 16
+      
+      .form-group
+        = label_tag :cvc, "CVC", class: 'control-label race-class'
+        = text_field_tag :cvc, nil, name: nil, "data-stripe" => "cvc", class: 'form-control'
+      
+      .form-group
+        = label_tag nil, "Expiration Date", class: 'control-label race-class'
+        .row
+          .col-xs-3
+            = select_month nil, {field_name: 'exp_month', prompt: 'Month'}, id: 'exp_month', class: 'form-control', data: {stripe: 'exp_month'}
+          .col-xs-1
+            p style="font-size: 25px;"
+              | /
+          .col-xs-3
+            = select_year nil, {field_name: 'exp_year', prompt: 'Year', start_year: Time.new.year, end_year: Time.new.year + 10}, id: 'exp_year', class: 'form-control', data: {stripe: 'exp_year'}
+      = submit_tag "Submit", id: "payment-submit", class: 'btn btn-lg btn-success'
+
+    script src="https://js.stripe.com/v2/" type="text/javascript"

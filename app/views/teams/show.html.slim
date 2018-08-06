@@ -1,0 +1,22 @@
+h1
+  = @team.name
+hr
+= link_to "Back", :back, class: "btn btn-warning"
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-sm-4
+        h4 Rider Name
+      .col-sm-4
+        h4 Points 
+      .col-sm-4
+        h4 My Points
+  .panel-body         
+    -@team.riders.each do |rider|
+        .row
+          .col-sm-4
+            = rider.name
+          .col-sm-4.point_total 
+            = rider.points_total 
+          .col-sm-4.point_total 
+            = rider.user_rider_points_total(current_user)

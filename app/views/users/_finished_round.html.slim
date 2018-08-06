@@ -1,0 +1,39 @@
+.row
+  h3.col-sm-10.col-md-6
+    = round.name
+  h3.col-md-6.visible-md.visible-lg
+    |Race Finish
+- stats = current_user.user_round_stats.where(round: round).first
+- if stats.nil?
+
+-else
+  h5 
+    |Points for round: &nbsp;
+    = stats.total
+  .row
+    ol.col-sm-10.col-md-6.font-black
+      -current_user.rider_positions_for_round(round).each do |rider_position|
+        - if rider_position.try(:rider)
+          li
+            = rider_position.rider.name
+            span
+              |&nbsp;
+              |points: 
+              = rider_position.score
+      h6 Bonus Selection
+
+      p Pole Position Score
+      p = stats.pole_position_score
+      p Moto Winner Score
+      p = stats.heat_winner_score
+      p Main Event Hole Shot score
+      p = stats.hole_shot_score
+   
+    -if round.finished?
+      h3.col-md-6.visible-sm.visible-xs
+        |Race Finish
+      ol.col-sm-10.col-md-6.font-black
+        -round.round_riders_where_finished_is(true).each do |round_rider|
+          li
+            = round_rider.finished_description
+  

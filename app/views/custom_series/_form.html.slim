@@ -1,0 +1,16 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      | Series Information
+  .panel-body  
+    = form_for @custom_series, html: { class: 'form-inline new-custom-series-form'} do |f|      
+      .form-group
+        = f.label :name, "Private Series Name", class: "sr-only"
+        = f.text_field :name, placeholder: "Name", class: "form-control"
+      .form-group
+        = f.label :series_id, "Select a series", class: "sr-only"
+        = f.collection_select :series_id, Series.all, :id, :name, {}, {class: 'form-control'}
+      .form-group
+        = f.label :is_public, "Select private/public option", class: "sr-only"
+        = f.select :is_public, [['Public', true], ['Private', false]], class: 'form-control'
+      = f.button "Update", class: "btn btn-default"

@@ -1,0 +1,50 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      | Users Group
+  .panel-body
+    table.table.table-striped    
+      thead
+        tr
+          th Name
+          th Email
+          th Actions
+      tbody
+        - if @custom_series.owner == current_user
+          - @custom_series.custom_series_licenses.each do |custom_series_license|
+            tr
+              td
+                = custom_series_license.user.name
+              td
+                = custom_series_license.user.email 
+              td
+                - if custom_series_license.user == current_user
+                  = "( You )"
+                - else
+                  = link_to 'Delete', custom_series_license_path(custom_series_license), method: :delete, class: 'btn i_delete', confirm: 'Are you sure?'
+        - else
+          - @custom_series.custom_series_licenses.each do |custom_series_license|
+            tr
+              td
+                = custom_series_license.user.name
+              td
+                - if custom_series_license.user == current_user
+                  = "#{custom_series_license.user.email} ( You )"
+                - else
+                  = custom_series_license.user.email
+              td
+                - if custom_series_license.user == current_user                
+                  = link_to 'Leave', custom_series_license_path(custom_series_license), method: :delete, class: 'btn i_delete', confirm: 'Are you sure?'
+
+
+
+
+
+
+
+
+
+
+
+
+

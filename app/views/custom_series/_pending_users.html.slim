@@ -1,0 +1,17 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      | Invitations You Sent
+  .panel-body  
+    table.table.table-striped    
+      thead
+        tr
+          th Recipient Email
+          th Actions
+      tbody
+        - @custom_series.custom_series_invitations.each do |custom_series_invitation|
+          tr
+            td
+              = custom_series_invitation.recipient_email
+            td
+              = link_to 'Remove', custom_series_invitation_path(custom_series_invitation), method: :delete, class: 'btn i_delete', confirm: 'Are you sure?'

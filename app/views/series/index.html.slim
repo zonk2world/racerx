@@ -1,0 +1,12 @@
+.page-header
+ h1 
+  |My Results 
+- current_user.race_classes.each do |race_class|
+  h3
+    = race_class.series
+    | &nbsp;
+    = race_class.name
+  ul.finished_rounds    
+    - Round.finished_for(race_class).each do |round|
+      li 
+        = link_to round.name, round_path(round)

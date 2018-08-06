@@ -1,0 +1,6 @@
+h3.series-h3
+  | Edit Series @custom_series.name
+
+= render 'form' if @custom_series.owner == current_user
+= render 'custom_series_licenses'
+= render 'pending_users'

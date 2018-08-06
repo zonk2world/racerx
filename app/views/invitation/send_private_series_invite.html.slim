@@ -1,0 +1,12 @@
+h1 = @invite.sender.email
+h2 has invited you to participate in a private series for MotoDynasty
+
+p 
+  |If you already have an account and would like to join
+p
+  = link_to "Click here", custom_series_url(@invite.custom_series, token: @invite.token, host: ENV['EMAIL_HOST'])
+
+p
+  |If you are not currently registered you can do so here
+p
+  = link_to "Sign up today", new_user_registration_url(host: ENV['EMAIL_HOST'])

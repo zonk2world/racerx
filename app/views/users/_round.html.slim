@@ -1,0 +1,113 @@
+-if can? :edit, current_user          
+  - rider_position = current_user.available_rider_position_for_round(round)
+  -if rider_position.present?
+    hr
+    .row.seleteTitle
+      .col-md-12
+        |Select your riders
+    .row
+      .col-md-8.col-sm-12
+        = form_for rider_position, remote: true, html: {class: 'form-inline'} do |f|
+          = hidden_field_tag :div_id, "race_class#{race_class.id}"
+          = f.hidden_field :round_id, value: round.id
+          .row.racer-row
+            .col-sm-7.col-xs-8 
+              = f.collection_select :rider_id, current_user.available_riders_for_round(round), :id, :to_s, {}, {class: 'form-control'}
+            .col-sm-2.col-xs-4
+              = f.submit "Add Rider", class: "btn btn-primary", data: { disable_with: "Adding..." }
+
+        = form_for rider_position, url: update_with_lastweek_riders_path, method: :post, remote: true, html: {class: 'form-inline'} do |f|
+          = hidden_field_tag :div_id, "race_class#{race_class.id}"
+          = f.hidden_field :round_id, value: round.id
+          = f.submit "Regenerate", class: "btn btn-primary", data: { disable_with: "Regenerating..." }
+  br
+  .clearfix
+    ol.select_riders.col-sm-12.col-md-12 data-update-url=(sort_rider_users_path) data-round-id=(round.id)
+      - current_user.rider_positions_for_round(round).each_with_index do |rider_position, index|        
+        = content_tag_for :li, rider_position do
+          .row
+            .col-xs-8          
+              a.handle.btn-sm.move-btn href="#" onclick="event.preventDefault()" id=("rider_position_handle#{rider_position.id}")
+                span.glyphicon.glyphicon-sort.glyph-white
+              |&nbsp;              
+              = rider_position.rider.try(:race_number)
+              | &nbsp; - &nbsp;
+              = rider_position.rider.try(:name)
+            .col-xs-4.pull-right 
+              -if rider_position.rider
+                = link_to 'Remove', rider_position_path(rider_position, div_id: "race_class#{race_class.id}"), method: :delete, remote: true,  class: "btn btn-danger btn-xs pull-right", id: 'remove_rider_button'
+  .row.seleteTitle
+    h4.col-md-12
+      |Bonus (Optional)
+      span.glyphicon.glyphicon-question-sign.btn data-toggle="modal" data-target="#bonusModal"
+  .row
+    .col-md-12
+      -BonusType.ordered.each do |bonus_type|
+        - if selection = current_user.bonus_selection_by_round_and_type(round, bonus_type.name)
+          .row.racer-row
+            .col-md-4
+              -if bonus_type.name == "HeatWinner"
+                strong = "Moto Winner"
+                |: &nbsp;
+                = selection.try(:rider).try(:name)
+              -else
+                strong = bonus_type.to_s
+                |: &nbsp;
+                = selection.try(:rider).try(:name)
+            .col-sm-5.col-xs-8
+              -if current_user.bonus_selection_available?(round, bonus_type)
+                = link_to content_tag(:button, "Remove", class: "btn btn-danger RemoveBonus"), user_round_bonus_selection_path(selection, race_class: race_class, div_id: "race_class#{race_class.id}"), method: :delete, remote: true
+              -else
+                p
+                  strong
+                    = bonus_type.to_s
+                  |&nbsp; selection is currently closed
+            .col-md-3
+              b
+                |+/- &nbsp;
+                |points &nbsp;
+                =bonus_type.value
+        -else 
+          -if current_user.bonus_selection_available?(round, bonus_type)
+            -if bonus_type.name == "PolePosition"
+              p Pole Position Selection Ends
+              p = format_datetime(round.pole_position_end)
+            = form_for current_user.user_round_bonus_selections.new, remote: true, html: {class: 'form-inline'} do |f|
+              = hidden_field_tag :div_id, "race_class#{race_class.id}"
+              = hidden_field_tag :race_class, race_class.id
+              = f.hidden_field :round_id, value: round.id
+              = f.hidden_field :bonus_type_id, value: bonus_type.id
+              .row.racer-row
+                -if bonus_type.name == "HeatWinner"
+                  label.bonus.Blabel for='bonus'
+                    |Moto Winner
+                    |&nbsp;
+                    b
+                      |+/- &nbsp;
+                      =bonus_type.value
+                -else
+                  label.bonus.Blabel for='bonus'
+                    =bonus_type 
+                    |&nbsp;
+                    b
+                      |+/- &nbsp;
+                      =bonus_type.value
+                .col-sm-5.col-xs-8
+                  = f.collection_select :rider_id, round.riders, :id, :to_s, {}, {class: 'form-control bonus'}
+
+                .col-md-2.col-sm-3.col-xs-4           
+                  = submit_tag "Add", class: "btn btn-primary bonus add_bonus_#{bonus_type.name.downcase}", data: { disable_with: "Adding..." }
+                
+                  
+                
+          -else
+            p
+              strong
+                = bonus_type.to_s
+              |&nbsp; selection is currently closed
+      
+- else
+  p
+    | Rider selection is currently closed. 
+            
+            

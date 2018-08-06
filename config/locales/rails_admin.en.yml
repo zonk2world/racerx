@@ -1,0 +1,13 @@
+en:
+  admin:
+    actions:
+      generate_series: 
+        title: "Generate New Series"
+        menu: "Generate new"
+        breadcrumb: "Generate"
+        link: "Generate New Series"
+      restart_series:
+        title: "Restart Series"
+        menu: "Restart Series"
+        breadcrumb: "Restart"
+        link: "Restart Series"

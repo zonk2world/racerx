@@ -1,0 +1,12 @@
+h1 = @request.sender.email
+h2 has requested your custom series for MotoDynasty
+
+p 
+  |If you already have an account and would like to join
+p
+  = link_to "Click here", custom_series_show_request_url(@request.custom_series, request_token: @request.token, host: ENV['EMAIL_HOST'])
+
+p
+  |If you are not currently registered you can do so here
+p
+  = link_to "Sign up today", new_user_registration_url(host: ENV['EMAIL_HOST'])

@@ -1,0 +1,11 @@
+= form_tag restart_series_path, method: "post", class: 'form-horizontal denser' do
+  
+  fieldset
+    .form-group.control-group 
+      = label_tag :series_id, "Select Series:", class: "control-label col-sm-2"          
+      .col-sm-5
+        = select_tag 'series_id', options_from_collection_for_select(Series.completed_list, 'id', 'name'), {class: 'form-control'}
+      
+    .form-group.control-group
+      .col-sm-5.col-sm-offset-2        
+        = submit_tag "Restart", class: "btn btn-primary"

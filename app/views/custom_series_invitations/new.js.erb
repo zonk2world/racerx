@@ -1,0 +1,7 @@
+
+if($("#new_series_invitation_<%= @custom_series.id %>").html() != ''){
+  $('.new-series-invitation').html('');
+}else{
+  $('.new-series-invitation').html('');
+  $("#new_series_invitation_<%= @custom_series.id %>").html('<%= j render partial: "custom_series_invitations/form" %>');
+}

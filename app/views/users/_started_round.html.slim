@@ -1,0 +1,24 @@
+h4.text-center.text-info
+  |Round currently closed for selection
+h5 Rider Selection
+ol
+  - current_user.rider_positions_for_round(round).each_with_index do |rider_position, index|
+    = content_tag_for :li, rider_position do
+      .row
+        .col-sm-4
+          = rider_position.rider.try(:race_number)
+          | &nbsp; - &nbsp;
+          = rider_position.rider.try(:name)
+        .col-sm-8
+h5 Bonus Selection
+-BonusType.ordered.each do |bonus_type|
+  - selection = current_user.bonus_selection_by_round_and_type(round, bonus_type.name)
+  - if selection
+    p= bonus_type.to_s
+    p= selection.rider.to_s
+  - else
+    p
+      |None selected for &nbsp;
+      = bonus_type.to_s
+
+

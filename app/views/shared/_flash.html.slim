@@ -1,0 +1,15 @@
+- if flash[:error]
+  = content_tag :div, class: "alert alert-danger alert-dismissable" do
+    button.close aria-hidden="true" data-dismiss="alert" type="button" &times;
+    = flash[:error]
+- if flash[:notice]
+  = content_tag :div, class: "alert alert-success alert-dismissable" do
+    button.close aria-hidden="true" data-dismiss="alert" type="button" &times;
+    = flash[:notice]
+- if flash[:alert]
+  = content_tag :div, class: "alert alert-info alert-dismissable" do
+    button.close aria-hidden="true" data-dismiss="alert" type="button" &times;
+    = flash[:alert]
+
+
+

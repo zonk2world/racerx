@@ -1,0 +1,5 @@
+if($('#new_public_custom_series').html() != ''){
+  $("#new_public_custom_series").html('');
+}else{
+  $("#new_public_custom_series").html('<%= j render partial: "custom_series/form_public" %>');
+}

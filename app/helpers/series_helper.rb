@@ -1,0 +1,3 @@
+module SeriesHelper
+  
+end

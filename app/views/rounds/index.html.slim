@@ -1,0 +1,45 @@
+.page-header
+ h1 
+  |My Results 
+- if current_user.race_classes.empty?
+  .alert.alert-warning
+    |You aren't currently signed up for any series
+- else
+  .row.tabpanel
+    .col-md-4.col-sm-4
+      h4.cardHeader
+        |Race Cards
+      ul.nav.nav-sidebar.drop_shadow
+        - current_user.race_classes.each do |race_class|
+          li
+            a data-toggle='tab' href=("#race_class#{race_class.id}")
+              = race_class.series
+              | &nbsp;
+              = race_class.name
+    .tab-content.col-md-8.col-sm-8.col-xs-12
+      - current_user.race_classes.each do |race_class|
+        .tab-pane id=("race_class#{race_class.id}")  
+
+          .module.clearfix
+            header.module_heading.module_heading_dropdown
+              nav.nav.nav_horiz.nav_context.nav_icon
+                ul
+                  li
+                    a href="javascript:void(0)" 
+                      i.icon-sort-down
+              h2
+                a href="javascript:void(0)" Select Round
+                .dropdown
+                  ul role="navigation"
+                    - Round.finished_for(race_class).each do |round|
+                      li
+                        a data-toggle='tab' href=("##{round.id}") = round.name
+
+          .tab-content.col-md-12.col-sm-12.col-xs-12.well.tabWell 
+            - Round.finished_for(race_class).each do |round|
+              .tab-pane id=("#{round.id}")
+                = render partial: 'users/finished_round', locals: {round: round, race_class: round.race_class}
+
+
+
+            
